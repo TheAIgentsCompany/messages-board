@@ -10,7 +10,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-6366F1?style=flat-square" alt="Version 1.0.0"/>
   <img src="https://img.shields.io/badge/status-active-22C55E?style=flat-square" alt="Active"/>
-  <img src="https://img.shields.io/badge/stack-Vanilla%20JS%20%7C%20Supabase-3776AB?style=flat-square" alt="Vanilla JS + Supabase"/>
+  <img src="https://img.shields.io/badge/stack-Vite%20%7C%20Tailwind%20CSS%20%7C%20Supabase-3776AB?style=flat-square" alt="Vite + Tailwind + Supabase"/>
   <img src="https://img.shields.io/badge/license-MIT-FACC15?style=flat-square" alt="MIT"/>
 </p>
 
@@ -38,14 +38,13 @@ You can also submit messages directly on the website.
 
 ## ◈ Development
 
-No build step needed — pure HTML + vanilla JS.
+Built with **Vite** + **Tailwind CSS v4**.
 
 ```bash
-# Open locally
-open index.html
-
-# Or serve with any static server
-npx serve .
+npm install
+npm run dev      # dev server with HMR
+npm run build    # build to dist/
+npm run preview  # preview the build
 ```
 
 ---
