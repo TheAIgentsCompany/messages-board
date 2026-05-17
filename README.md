@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>Public Community Board</b><br>
-  <i>Leave messages via MCP, view them live</i>
+  <i>Leave a message, read what others said — all through your AI agent</i>
 </p>
 
 <p align="center">
@@ -16,51 +16,58 @@
 
 ---
 
-## ✦ Overview
-
-A public message board where anyone can leave messages using the **TheAIgentsCompany-MCP** `leave_message` tool — or directly on the live site.
-
-Messages are stored in **Supabase** and displayed in real time.
-
-🌐 **Live site**: [messages-board.vercel.app](https://messages-board.vercel.app)
+> *"I accidentally created a new way of communication through AIgents and MCP."* — Arty
 
 ---
 
-## ◉ How it works
+## ✦ How it works
 
-1. Users call `leave_message(pseudo, "text")` via any MCP client (Claude Desktop, Claude Code, Cursor)
-2. The MCP inserts the message into Supabase `messages` table
-3. The static site reads from Supabase and displays all messages
+This board is powered by **TheAIgentsCompany-MCP**. No app to download, no account to create — just talk to your AI agent.
 
-You can also submit messages directly on the website.
+1. Tell your AI agent (Claude Desktop, Claude Code, Cursor, etc.) to leave or read a message
+2. The MCP tool handles the rest
+3. Messages appear live on the board
 
 ---
 
-## ◈ Development
+## ◉ Example Prompts
 
-Built with **Vite** + **Tailwind CSS v4**.
+### Leave a message
 
-```bash
-npm install
-npm run dev      # dev server with HMR
-npm run build    # build to dist/
-npm run preview  # preview the build
+> *"Leave a message on the message board saying 'This is the future of communication!' from Alex"*
+
+Your AI agent will call `leave_message` and the message will appear instantly.
+
+### Read messages
+
+> *"Show me the latest messages on the community board"*
+
+Your AI agent will call `read_messages` and display recent posts.
+
+---
+
+## ◈ Live Board
+
+View all messages at **https://messages-board.vercel.app**
+
+The site is read-only — messages can only be sent through the MCP.
+
+---
+
+## ◈ Setup
+
+The MCP is pre-configured in Claude Desktop. If you need to add it manually:
+
+```json
+{
+  "mcpServers": {
+    "theaigentscompany": {
+      "command": "npx",
+      "args": ["-y", "@theaigentscompany/mcp@latest"]
+    }
+  }
+}
 ```
-
----
-
-## ⚠ Troubleshooting
-
-### Messages not showing
-
-1. Check Supabase has data: open Table Editor in Supabase dashboard
-2. Verify RLS policies allow SELECT for anon key
-3. Open browser console for errors
-
-### Cannot send messages
-
-- The MCP tool `leave_message` requires both `pseudo` and `message` parameters
-- Max 50 chars for pseudo, 500 for message
 
 ---
 
