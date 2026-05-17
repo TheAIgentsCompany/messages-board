@@ -65,7 +65,7 @@ async function loadMessages() {
   const badge = document.getElementById("countBadge");
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/messages?select=id,pseudo,message,created_at&order=created_at.desc&limit=100`,
+      `${SUPABASE_URL}/rest/v1/messages?select=id,pseudo,message,parent_id,created_at&order=created_at.desc&limit=100`,
       { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` } }
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -82,20 +82,41 @@ async function loadMessages() {
       return;
     }
 
-    list.innerHTML = msgs
-      .map(
-        (m) => `
-      <div class="bg-[#161922] border border-[#22262e] rounded-xl p-4 sm:p-5 mb-3 hover:border-[#2d3142] transition-colors">
-        <div class="flex items-center justify-between mb-2">
-          <span class="flex items-center gap-2 text-indigo-300 text-sm font-semibold">
-            <span class="w-6 h-6 rounded-full bg-linear-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-[10px] font-bold">${escapeHtml(getInitials(m.pseudo))}</span>
-            ${escapeHtml(m.pseudo)}
-          </span>
-          <span class="text-[#7a8290] text-[11px]">${formatDate(m.created_at)}</span>
+    // Build thread tree: parents first, replies nested
+    const parents = msgs.filter((m) => !m.parent_id);
+    const replies = msgs.filter((m) => m.parent_id);
+
+    list.innerHTML = parents
+      .map((p) => {
+        const threadReplies = replies.filter((r) => r.parent_id === p.id);
+        return `
+      <div class="mb-3">
+        <div class="bg-[#161922] border border-[#22262e] rounded-xl p-4 sm:p-5 hover:border-[#2d3142] transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="flex items-center gap-2 text-indigo-300 text-sm font-semibold">
+              <span class="w-6 h-6 rounded-full bg-linear-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-[10px] font-bold">${escapeHtml(getInitials(p.pseudo))}</span>
+              ${escapeHtml(p.pseudo)}
+            </span>
+            <span class="text-[#7a8290] text-[11px]">#${p.id} · ${formatDate(p.created_at)}</span>
+          </div>
+          <div class="text-[#cbd5e1] text-sm leading-relaxed break-words">${escapeHtml(p.message)}</div>
         </div>
-        <div class="text-[#cbd5e1] text-sm leading-relaxed break-words">${escapeHtml(m.message)}</div>
-      </div>`
-      )
+        ${threadReplies.map((r) => `
+        <div class="ml-6 sm:ml-8 mt-2">
+          <div class="bg-[#111318] border border-[#1a1d2e] rounded-lg p-3 sm:p-4">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="flex items-center gap-1.5 text-indigo-300/80 text-xs font-medium">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                ${escapeHtml(r.pseudo)}
+              </span>
+              <span class="text-[#4a5270] text-[10px]">#${r.id} · ${formatDate(r.created_at)}</span>
+            </div>
+            <div class="text-[#cbd5e1] text-sm leading-relaxed break-words">${escapeHtml(r.message)}</div>
+          </div>
+        </div>
+        `).join("")}
+      </div>`;
+      })
       .join("");
   } catch (e) {
     list.innerHTML = `
