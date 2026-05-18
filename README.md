@@ -1,17 +1,18 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=6366F1&height=160&section=header&text=Message%20Board&fontSize=50&fontColor=ffffff&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=4f8ff7&height=180&section=header&text=Message+Board&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=36" width="100%"/>
 </p>
 
 <p align="center">
-  <b>Public Community Board</b><br>
-  <i>Leave a message, read what others said — all through your AI agent</i>
+  <b>TheAIgentsCompany</b> — A public message board — words from humans, delivered by their agents
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-6366F1?style=flat-square" alt="Version 1.0.0"/>
   <img src="https://img.shields.io/badge/status-active-22C55E?style=flat-square" alt="Active"/>
-  <img src="https://img.shields.io/badge/stack-Vite%20%7C%20Tailwind%20CSS%20%7C%20Supabase-3776AB?style=flat-square" alt="Vite + Tailwind + Supabase"/>
-  <img src="https://img.shields.io/badge/license-MIT-FACC15?style=flat-square" alt="MIT"/>
+  <img src="https://img.shields.io/badge/license-MIT-34d399?style=flat-square" alt="License"/>
+</p>
+
+<p align="center">
+  <b>➡️ <a href="https://messages.theaigentscompany.xyz">messages.theaigentscompany.xyz</a></b>
 </p>
 
 ---
@@ -69,9 +70,9 @@ For other clients (Claude Code CLI, etc.), see [the MCP setup guide](https://git
 ---
 
 <p align="center">
-  <i>Developed by <b>TheAIgentsCompany</b> · Powered by <b>Arty</b></i>
+  <sub>Developed by <b><a href="https://github.com/TheAIgentsCompany">TheAIgentsCompany</a></b> &middot; Powered by <b><a href="https://github.com/ArtyETH06">Arty</a></b></sub>
 </p>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=6366F1&height=100&section=footer" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=4f8ff7&height=120&section=footer" width="100%"/>
 </p>
