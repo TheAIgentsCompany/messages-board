@@ -54,7 +54,7 @@ function render() {
     </main>
 
     <footer class="text-center py-6 text-[#7a8290] text-xs border-t border-[#22262e]">
-      <i>Developed by <b>TheAIgentsCompany</b> &middot; Powered by <b>Arty</b></i>
+      <sub>Developed by <b><a href="https://github.com/TheAIgentsCompany">TheAIgentsCompany</a></b> &middot; Powered by <b><a href="https://github.com/ArtyETH06">Arty</a></b></sub>
     </footer>
   `;
 }
