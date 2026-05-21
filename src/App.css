@@ -23,6 +23,38 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+/* ── Auth Brand (shared) ────────────────── */
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.auth-brand-svg {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.auth-brand-svg svg {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
+}
+
 /* ── Layout ─────────────────────────────── */
 
 .page {
@@ -72,19 +104,23 @@ a:hover { text-decoration: underline; }
 
 .form-group input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px 14px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 10px;
   color: var(--text);
   font-size: 15px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-group input::placeholder {
+  color: #3a4050;
 }
 
 /* ── Buttons ────────────────────────────── */
@@ -94,7 +130,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 11px 20px;
+  padding: 12px 20px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -118,6 +154,7 @@ a:hover { text-decoration: underline; }
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .btn-danger {
@@ -167,6 +204,7 @@ a:hover { text-decoration: underline; }
   margin-top: 20px;
   font-size: 13px;
   color: var(--muted);
+  text-align: center;
 }
 
 /* ── Dashboard ──────────────────────────── */
@@ -286,6 +324,7 @@ a:hover { text-decoration: underline; }
 
 .create-token input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 .create-token .btn {
@@ -340,7 +379,7 @@ a:hover { text-decoration: underline; }
 }
 
 .footer a { color: var(--muted); font-weight: 600; }
-.footer a:hover { color: var(--text); }
+.footer a:hover { color: var(--text); text-decoration: none; }
 
 /* ── Anim ───────────────────────────────── */
 

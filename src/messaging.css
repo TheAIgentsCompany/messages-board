@@ -27,8 +27,9 @@
 .sidebar-header h2 { font-size: 16px; font-weight: 700; }
 
 .btn-icon {
-  background: none; border: none; color: var(--muted); font-size: 18px;
-  cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: all 0.2s;
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; padding: 6px; border-radius: 8px; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
 }
 .btn-icon:hover { background: var(--border); color: var(--text); }
 
@@ -41,9 +42,12 @@
   flex: 1; padding: 8px 12px; border: none; border-radius: 8px;
   background: transparent; color: var(--muted); font-size: 13px;
   font-weight: 600; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 .tab:hover { color: var(--text); background: var(--border); }
 .tab.active { background: var(--accent); color: #fff; }
+
+.tab-icon { display: flex; align-items: center; }
 
 .conv-list { flex: 1; overflow-y: auto; padding: 4px 8px; }
 
@@ -55,10 +59,16 @@
 .conv-item:hover { background: var(--border); }
 .conv-item.active { background: rgba(79, 143, 247, 0.1); }
 
-.conv-icon { font-size: 20px; flex-shrink: 0; }
+.conv-icon {
+  font-size: 20px; flex-shrink: 0; width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+}
 .conv-info { min-width: 0; flex: 1; }
 .conv-name { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .conv-preview { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.preview-pseudo { color: var(--accent); font-weight: 600; }
+.preview-empty { color: var(--muted); }
 
 .empty-state-sm { text-align: center; color: var(--muted); padding: 20px; font-size: 13px; }
 
@@ -76,7 +86,8 @@
   font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
 }
 .user-name { font-size: 14px; font-weight: 600; flex: 1; overflow: hidden; text-overflow: ellipsis; }
-.logout-icon { color: var(--muted); font-size: 16px; }
+.logout-icon-btn { color: var(--muted); display: flex; align-items: center; }
+.logout-icon-btn:hover { color: var(--red); }
 
 /* ── Main ───────────────────────────────── */
 
@@ -85,14 +96,15 @@
 
 .conv-header {
   display: flex; align-items: center; gap: 12px;
-  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
-.conv-header h2 { font-size: 16px; font-weight: 700; }
+.conv-header h2 { font-size: 16px; font-weight: 700; flex: 1; }
 
 .back-btn {
   background: none; border: none; color: var(--accent);
-  font-size: 18px; cursor: pointer; padding: 2px 6px; border-radius: 6px;
+  cursor: pointer; padding: 4px; border-radius: 6px;
+  display: flex; align-items: center;
 }
 .back-btn:hover { background: var(--border); }
 
@@ -105,7 +117,7 @@
 
 .msg-list {
   flex: 1; overflow-y: auto; padding: 16px 20px;
-  display: flex; flex-direction: column; gap: 8px;
+  display: flex; flex-direction: column; gap: 6px;
 }
 
 .empty-state { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 14px; }
@@ -114,6 +126,7 @@
   max-width: 75%; padding: 10px 14px; border-radius: 12px;
   background: var(--surface); border: 1px solid var(--border);
   align-self: flex-start; animation: fadeUp 0.2s ease-out;
+  position: relative;
 }
 .msg-bubble.mine { align-self: flex-end; background: var(--accent); border-color: var(--accent); }
 .msg-bubble.public { max-width: 100%; }
@@ -124,6 +137,61 @@
 .msg-time { font-size: 10px; color: var(--muted); }
 .msg-bubble.mine .msg-time { color: rgba(255,255,255,0.5); }
 .msg-text { font-size: 14px; line-height: 1.5; word-break: break-word; }
+
+/* ── Message Actions ────────────────────── */
+
+.msg-actions {
+  display: flex; gap: 4px; margin-top: 6px; opacity: 0;
+  transition: opacity 0.15s;
+}
+.msg-bubble:hover .msg-actions, .msg-bubble.public:hover .msg-actions { opacity: 1; }
+
+.msg-action-btn {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; padding: 4px; border-radius: 6px;
+  display: flex; align-items: center; transition: all 0.15s;
+}
+.msg-action-btn:hover { color: var(--accent); background: var(--border); }
+.msg-bubble.mine .msg-action-btn { color: rgba(255,255,255,0.5); }
+.msg-bubble.mine .msg-action-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
+/* ── Reply Indicator ────────────────────── */
+
+.reply-indicator {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px; background: var(--surface);
+  border-bottom: 1px solid var(--border); font-size: 12px;
+  color: var(--muted);
+}
+.reply-icon { color: var(--accent); display: flex; align-items: center; flex-shrink: 0; }
+.reply-label { white-space: nowrap; }
+.reply-label strong { color: var(--accent); }
+.reply-text-preview { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-style: italic; color: var(--muted); }
+.reply-cancel {
+  background: none; border: none; color: var(--muted); cursor: pointer;
+  padding: 4px; border-radius: 4px; display: flex; align-items: center;
+  flex-shrink: 0;
+}
+.reply-cancel:hover { color: var(--red); background: var(--border); }
+
+/* ── Threaded Replies (Public) ──────────── */
+
+.msg-thread { margin-bottom: 12px; }
+
+.thread-replies {
+  margin-left: 24px; padding-left: 16px;
+  border-left: 2px solid var(--border);
+  display: flex; flex-direction: column; gap: 6px; margin-top: 6px;
+}
+
+.msg-bubble.public.reply {
+  max-width: calc(100% - 24px);
+  display: flex; gap: 8px; padding: 8px 12px;
+}
+.thread-line { display: none; }
+.reply-content { flex: 1; }
+
+/* ── Input Area ─────────────────────────── */
 
 .msg-input-area {
   display: flex; gap: 10px; padding: 14px 20px;
@@ -136,6 +204,12 @@
 }
 .msg-input-area input:focus { border-color: var(--accent); }
 .msg-input-area .btn { width: auto; white-space: nowrap; }
+
+.btn-send {
+  width: 40px !important; height: 40px !important;
+  padding: 0 !important; border-radius: 10px !important;
+  flex-shrink: 0;
+}
 
 /* ── Modal ───────────────────────────────── */
 
