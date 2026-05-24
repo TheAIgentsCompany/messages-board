@@ -481,20 +481,24 @@ export default function Dashboard() {
 
             <div className="msg-list">
               {messages.length === 0 ? <div className="empty-state">No messages yet</div> : (
-                messages.map((m) => (
-                  <div className={`msg-bubble ${m.sender_id === session.id ? "mine" : ""}`} key={m.id}>
-                    <div className="msg-meta">
-                      <span className="msg-author">{m.sender_id === session.id ? "You" : m.pseudo}</span>
-                      <span className="msg-time">{formatTime(m.created_at)}</span>
+                messages.map((m) => {
+                  const isMine = m.sender_id === session.id;
+                  return (
+                    <div className={`msg-bubble ${isMine ? "mine" : ""}`} key={m.id}>
+                      <div className="msg-meta">
+                        <span className="msg-author">{isMine ? "You" : m.pseudo}</span>
+                        {!isMine && <span className="msg-time">{formatTime(m.created_at)}</span>}
+                      </div>
+                      <div className="msg-text">{m.content}</div>
+                      {isMine && <div className="msg-time msg-time-below">{formatTime(m.created_at)}</div>}
+                      <div className="msg-actions">
+                        <button className="msg-action-btn" onClick={() => setReplyTo(m)} title="Reply">
+                          <IconReply />
+                        </button>
+                      </div>
                     </div>
-                    <div className="msg-text">{m.content}</div>
-                    <div className="msg-actions">
-                      <button className="msg-action-btn" onClick={() => setReplyTo(m)} title="Reply">
-                        <IconReply />
-                      </button>
-                    </div>
-                  </div>
-                ))
+                  );
+                })
               )}
               <div ref={msgEndRef} />
             </div>
