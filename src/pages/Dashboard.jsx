@@ -487,10 +487,9 @@ export default function Dashboard() {
                     <div className={`msg-bubble ${isMine ? "mine" : ""}`} key={m.id}>
                       <div className="msg-meta">
                         <span className="msg-author">{isMine ? "You" : m.pseudo}</span>
-                        {!isMine && <span className="msg-time">{formatTime(m.created_at)}</span>}
                       </div>
                       <div className="msg-text">{m.content}</div>
-                      {isMine && <div className="msg-time msg-time-below">{formatTime(m.created_at)}</div>}
+                      <div className="msg-time msg-time-below">{formatTime(m.created_at)}</div>
                       <div className="msg-actions">
                         <button className="msg-action-btn" onClick={() => setReplyTo(m)} title="Reply">
                           <IconReply />
